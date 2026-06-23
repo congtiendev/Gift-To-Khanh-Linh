@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+body {
+    background:  linear-gradient(
+      rgba(255, 255, 255, 0.9), 
+      rgba(255, 255, 255, 0.9)), url(./img/body-bg.webp);
+      font-family: "Dancing Script", cursive;
+  font-size: 18px !important;
+}
+
+
+.container {
+  overflow: hidden;
+}
+.book-wrapper {
+  position: relative;
+  margin: 2% auto;
+  width: 670px;
+  max-width: 100%;
+  /* Ẩn cho tới khi ảnh tải xong + sách dựng xong, tránh nháy/vỡ lần đầu */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.book-wrapper.is-ready {
+  opacity: 1;
+}
+
+/* Giữ sẵn tỉ lệ ảnh bìa (1024x744) để không bị nhảy layout khi ảnh chưa tải */
+.book-cover img {
+  width: 100%;
+  aspect-ratio: 1024 / 744;
+}
+
+/* Ảnh trong trang sách co theo bề rộng trang (turn.js scale theo px) */
+.page-photo {
+  width: 80%;
+  height: auto;
+}
+
+.book-wrapper img {
+      filter: drop-shadow(15px 5px 5px #494338);
+}
+
+/* Ảnh trong trang được "in" như ảnh phim cũ cho hợp tông giấy vintage:
+   khung giấy kem kiểu polaroid, hơi nghiêng, ám màu sepia ấm + bóng đổ mềm.
+   Selector đủ cụ thể (class + img) để ghi đè filter ở .book-wrapper img. */
+.book-wrapper img.page-photo {
+  width: 92%;
+  padding: 10px 10px 26px;
+  background: #f4ecd8;
+  border: 1px solid #d8c7a0;
+  border-radius: 2px;
+  transform: rotate(-2.2deg);
+  box-shadow: 0 6px 14px rgba(73, 67, 56, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  filter: sepia(0.5) saturate(0.82) contrast(0.95) brightness(0.98)
+    drop-shadow(3px 4px 4px rgba(73, 67, 56, 0.35));
+}
+
+/* Xen kẽ chiều nghiêng để trông tự nhiên như ảnh dán tay trên sổ. */
+.page-num-4 img.page-photo {
+  transform: rotate(2deg);
+}
+.page-num-6 img.page-photo {
+  transform: rotate(-1.4deg);
+}
+.pages-container {
+    position: absolute;
+    top: 4%;
+    left: 3%;
+    right: 0;
+    bottom: 0;
+    width: 91.5%;
+    height: 91%;
+}
+
+
+.pages [class^="page-num-"] {
+  background-image: url("./img/page-bg.webp");
+  background-size: auto 100%;
+  position: relative;
+}
+
+
+.pages-content {
+    text-align: center;
+      position: absolute;
+    width: 100%;
+    height: 100%;
+    display: table;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10%;
+}
+
+.content-inner {
+      text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.book-wrapper {
+   user-select: none;
+}
+
+/* Đồng bộ font của popup SweetAlert (tiêu đề, nội dung, lựa chọn và nhất là
+   các nút) với font "Dancing Script" của sách. */
+.swal2-popup,
+.swal2-title,
+.swal2-html-container,
+.swal2-radio label,
+.swal2-validation-message,
+.swal2-styled,
+.swal2-styled.swal2-confirm,
+.swal2-styled.swal2-cancel,
+.swal2-styled.swal2-deny {
+  font-family: "Dancing Script", cursive !important;
+}
+
+/* Nút thường khá nhỏ với font viết tay nên tăng cỡ chữ cho dễ đọc. */
+.swal2-styled {
+  font-size: 1.25rem;
+}
+
+
+.page-num-1 .pages-background {
+    background: linear-gradient( rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(./img/page-bg-flower.webp);
+    background-size: cover;
+    opacity: 0.2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+/* CSS */
+.button-55 {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Dancing Script", cursive;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-55:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.button-55:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+/* ----------------------------- Responsive ----------------------------- */
+
+/* Ảnh trong popup SweetAlert không tràn màn hình điện thoại */
+.swal2-image {
+  max-width: 70vw !important;
+  height: auto !important;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 15px !important;
+  }
+  .book-wrapper {
+    margin: 6% auto;
+  }
+  .button-55 {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+}
