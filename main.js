@@ -31,6 +31,11 @@
     var pagesH = Math.round(pagesW * (NATIVE.pagesH / NATIVE.pagesW));
 
     $pages.turn("size", pagesW, pagesH);
+
+    // Cho cỡ chữ co theo kích thước sách để không bị tràn khi thu nhỏ trên
+    // mobile. Ở kích thước gốc (pagesW = NATIVE.pagesW) chữ là 18px, nhỏ hơn
+    // thì chữ nhỏ theo đúng tỉ lệ giống hệt bố cục trên desktop.
+    $pages.css("font-size", (pagesW / NATIVE.pagesW) * 18 + "px");
   }
 
   // Debounce resize để tránh gọi turn('size') quá nhiều lần.
